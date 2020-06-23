@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <section class=" my-5">
+  <!-- <form action="/" method="post">
+    {% csrf_token %}
+    <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary px-md-4">
+      Prove <i class="far fa-lightbulb"></i>
+    </button>
+    </div>
+  </form> -->
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Модель</th>
+        <th scope="col">Точність</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if model %}
+          <tr>
+            <th  scope="row">{{ model.name }}</a></th>
+            <td>{{ model.model_accuracy|floatformat:2 }}</td>
+          </tr>
+      {% else %}
+        <tr>
+          <th scope="row">No model.</th>
+          <td></td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+  <section class=" my-4">
+    <div class="d-flex justify-content-left">
+      <span>{{ model.description }}</span>
+    </div>
+  </section>
+
+  <hr>
+
+  <section class=" my-4">
+    <div class="d-flex justify-content-center">
+      <form action="{% url 'predict' model_id %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <table>{{ form.as_table }}</table>
+      <div class="d-flex justify-content-center">
+        <p><input class="btn btn-primary px-md-4" type="submit" value="Спрогнозувати результат"/></p>
+      </div>
+    </form>
+    </div>
+  </section>
+
+  <div class="form-group mt-3">
+    <input class="form-control" type="text" value="{{result}}" placeholder="Результат" readonly>
+    <textarea class="form-control">{{prediction_result}}</textarea>
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <section class=" my-5">
+    <div class="d-flex justify-content-center">
+
+        <!-- Upload form. Note enctype attribute! -->
+        <form action="{% url 'list' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-flex justify-content-center">
+                <p><input class="btn btn-primary px-md-4" type="submit" value="Додати модель" /></p>
+            </div>
+        </form>
+    </div>
+
+</section>
+{% endblock content %}

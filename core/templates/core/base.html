@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+  {% include "core/head.html" %}
+
+  <body>
+
+    {% include "core/header.html" %}
+
+    <main role="main" class="container">
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+  
+    {% include "core/footer.html" %}
+    
+    {% include "core/scripts.html" %}
+
+  </body>
+
+</html>

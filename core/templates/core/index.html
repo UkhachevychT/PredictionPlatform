@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <section class=" my-5">
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Модель</th>
+        <th scope="col">Опис</th>
+        <th scope="col">Точність</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if models %}
+        {% for model in models %}
+            <tr>
+              <th  scope="row"> <a href="{% url 'predict' model_id=model.id %}">{{ model.name }}</a></th>
+              <td>{{ model.description|truncatewords:30 }}</td>
+              <td>{{ model.model_accuracy|floatformat:2 }}</td>
+            </tr>
+          {% endfor %}
+      {% else %}
+        <tr>
+          <th scope="row">No models.</th>
+          <td></td>
+          <td></td>
+        </tr>
+      {% endif %}
+    </tbody>
+  </table>
+
+  <hr>
+  
+  <div class="d-flex justify-content-center">
+    <a href="{% url 'list' %}"><input class="btn btn-primary px-md-4" type="submit" value="Додати модель" /></a href>
+  </div>
+
+</section>
+{% endblock content %}
